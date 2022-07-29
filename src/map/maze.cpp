@@ -23,19 +23,19 @@ int MazeGenerator::generate_maze(Maze &maze) const {
 			Point road_pnt_temp = road_pnt;
 			move(road_pnt_temp, dirs[i], 2);
 			
-			if(maze_temp->get_point_kind(road_pnt_temp) == ROAD) {
-				maze.set_point_kind(
-					{(road_pnt.x + road_pnt_temp.x)/2,
-						(road_pnt.y + road_pnt_temp.y)/2},
-					ROAD
-				);
-				maze_temp->set_point_kind(
-					{(road_pnt.x + road_pnt_temp.x)/2,
-					(road_pnt.y + road_pnt_temp.y)/2},
-					ROAD
-				);
-				break;
-			}
+			if(maze_temp->get_point_kind(road_pnt_temp) != ROAD)
+				continue;
+			maze.set_point_kind(
+				{(road_pnt.x + road_pnt_temp.x)/2,
+				(road_pnt.y + road_pnt_temp.y)/2},
+				ROAD
+			);
+			maze_temp->set_point_kind(
+				{(road_pnt.x + road_pnt_temp.x)/2,
+				(road_pnt.y + road_pnt_temp.y)/2},
+				ROAD
+			);
+			break;
 		}
 		
 		// 将 road_point 设置为路
@@ -46,11 +46,11 @@ int MazeGenerator::generate_maze(Maze &maze) const {
 			Point road_coord_temp = road_pnt;
 			move(road_coord_temp, dirs[i], 2);
 			
-			if(maze_temp->in(road_coord_temp)
-			&& maze_temp->get_point_kind(road_coord_temp) == UNDEFINED) {
-				maze_temp->set_point_kind(road_coord_temp, WALL);
-				walls.push(road_coord_temp);
-			}
+			if(!maze_temp->in(road_coord_temp)
+			|| maze_temp->get_point_kind(road_coord_temp) != UNDEFINED)
+				continue;
+			maze_temp->set_point_kind(road_coord_temp, WALL);
+			walls.push(road_coord_temp);
 		}
 	}
 	
