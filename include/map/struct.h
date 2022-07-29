@@ -58,7 +58,7 @@ public:
 	 * \return 是否成功设置
 	 * \retval -1 失败: 点不在网格内
 	 */
-	inline int set_point(const Point& pnt, PointType kind) {
+	inline int set_point_kind(const Point& pnt, PointType kind) {
 		if(in(pnt)) {
 			grid[pnt.y*width + pnt.x] = kind;
 			return 0;
@@ -68,16 +68,15 @@ public:
 	}
 	
 	/**
-	 * \param out 返回点的种类
-	 * \retval -1 点不在网格内
+	 * \brief 获取点的种类
+	 *
+	 * !! WARNING: 传入不在网格范围内的点将导致不可预料的行为
 	 */
-	inline int get_point(PointType& out, const Point& pnt) const {
-		if(in(pnt)) {
-			out = grid[pnt.y*width + pnt.x];
-			return 0;
-		} else {
-			return -1;
-		}
+	inline PointType get_point_kind(const Point& pnt) const {
+		if(in(pnt))
+			return grid[pnt.y*width + pnt.x];
+		else
+			return grid[0];
 	}
 	
 	inline int get_width() const {
