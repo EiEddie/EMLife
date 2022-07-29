@@ -3,8 +3,8 @@
  * \author EiEddie
  */
 
-#ifndef EMLIFE_INCLUDE_CORE_MAP_STRUCT_H_
-#define EMLIFE_INCLUDE_CORE_MAP_STRUCT_H_
+#ifndef EMLIFE_INCLUDE_MAP_STRUCT_H_
+#define EMLIFE_INCLUDE_MAP_STRUCT_H_
 
 #include <algorithm>
 
@@ -89,4 +89,4 @@ public:
 	}
 };
 
-#endif //EMLIFE_INCLUDE_CORE_MAP_STRUCT_H_
+#endif //EMLIFE_INCLUDE_MAP_STRUCT_H_
