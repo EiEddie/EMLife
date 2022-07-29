@@ -9,6 +9,7 @@
 #include "struct.h"
 
 #include <stack>
+#include <random>
 
 enum Block {
 	UNDEFINED = -1,

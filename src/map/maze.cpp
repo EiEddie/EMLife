@@ -1,7 +1,11 @@
 #include <map/maze.h>
 
 int MazeGenerator::generate_maze(Maze &maze) const {
-	// 初始化迷宫, 将迷宫每个点设置为0且加入起点, 起点恒为(1, 1)
+	// 初始化随机数生成器
+	std::random_device seed;
+	std::default_random_engine rand(seed());
+	
+	// 初始化迷宫, 加入起点, 起点恒为(1, 1)
 	Maze* maze_temp = new Maze(maze.get_width(), maze.get_height(), UNDEFINED);
 	
 	std::stack<Point> walls;
@@ -14,7 +18,7 @@ int MazeGenerator::generate_maze(Maze &maze) const {
 		maze.set_point_kind(road_pnt, ROAD);
 		
 		// 将 road_point 与其四周随机一个路点打通
-		const Dir* dirs = dirs_list[rand()%24]; //NOLINT
+		const Dir* dirs = dirs_list[rand()%24];
 		for(int i=0; i<4; i++) {
 			Point road_pnt_temp = road_pnt;
 			move(road_pnt_temp, dirs[i], 2);
